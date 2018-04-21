@@ -12,6 +12,7 @@
 - ant design
 - dexie
 - yarn
+- IndexedDB
 
 ## How to run
 1. yarn add
