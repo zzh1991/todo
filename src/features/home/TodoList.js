@@ -10,10 +10,12 @@ import { selectData, saveData, updateData } from './DbOperation';
 
 const Option = Select.Option;
 
-export class TodoList extends Component {
+export class CommonListContainer extends Component {
   static propTypes = {
     home: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired,
+    addMode: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -30,11 +32,18 @@ export class TodoList extends Component {
   }
 
   componentDidMount() {
-    this.fetchTodoList();
+    this.fetchTodoList(this.props.type);
   }
 
-  fetchTodoList = () => {
-    selectData('todo').then((res) => {
+  componentWillReceiveProps(nextProps) {
+    const { type } = nextProps;
+    if (type !== this.props.type) {
+      this.fetchTodoList(type);
+    }
+  }
+
+  fetchTodoList = (type) => {
+    selectData(type).then((res) => {
       this.props.actions.getTodoList(res);
     });
   };
@@ -53,6 +62,7 @@ export class TodoList extends Component {
 
   handleOk = () => {
     const { id, description, dueDate, detail, status, addStatus } = this.state;
+    const { type } = this.props;
     let data = {
       description,
       updateTime: Date.now(),
@@ -73,11 +83,11 @@ export class TodoList extends Component {
       };
       updateData(data).then((res) => {
         this.props.actions.updateToDo(res);
-      }).then(() => this.fetchTodoList());
+      }).then(() => this.fetchTodoList(type));
     } else {
       saveData(data).then((res) => {
         this.props.actions.addToDo(res);
-      }).then(() => this.fetchTodoList());
+      }).then(() => this.fetchTodoList(type));
     }
 
     this.setState({
@@ -179,9 +189,11 @@ export class TodoList extends Component {
 
     return (
       <div className="home-todo-list">
+        {this.props.addMode &&
         <div style={{ marginBottom: 8 }}>
           <Button type="primary" icon="plus" onClick={this.handleAdd}>Add</Button>
         </div>
+        }
         <Table
           columns={columns}
           expandedRowRender={this.renderToggleContent}
@@ -256,4 +268,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList);
+)(CommonListContainer);

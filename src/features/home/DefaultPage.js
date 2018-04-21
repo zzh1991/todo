@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import TodoList from './TodoList';
-import CompletedList from './CompletedList';
-import DeletedList from './DeletedList';
 
 const { Header, Content, Sider } = Layout;
 
-const CONTENT = {
-  Todo: <TodoList />,
-  Completed: <CompletedList />,
-  Deleted: <DeletedList />,
-};
-
 export class DefaultPage extends Component {
-  static propTypes = {
-    home: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
-  };
 
   constructor(props) {
     super(props);
@@ -34,15 +21,13 @@ export class DefaultPage extends Component {
   }
 
   handleMenuChange = ({ item, key, keyPath }) => {
-    console.log(item);
-    console.log(key);
-    console.log(keyPath);
     this.setState({
       toolbarTitle: this.capitalizeFirstLetter(key),
     });
   };
 
   render() {
+    const { toolbarTitle } = this.state;
     return (
       <Layout>
         <Header className="header" style={{ paddingLeft: 20 }} >
@@ -77,10 +62,13 @@ export class DefaultPage extends Component {
           <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>{this.state.toolbarTitle}</Breadcrumb.Item>
+              <Breadcrumb.Item>{toolbarTitle}</Breadcrumb.Item>
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0 }}>
-              {CONTENT[this.state.toolbarTitle]}
+              <TodoList
+                type={toolbarTitle.toLowerCase()}
+                addMode={toolbarTitle === 'Todo'}
+              />
             </Content>
           </Layout>
         </Layout>
