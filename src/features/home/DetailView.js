@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 import 'brace/theme/github';
-import 'brace/mode/markdown';
-import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
@@ -10,6 +9,7 @@ export default class DetailView extends Component {
   static propTypes = {
     detail: PropTypes.string.isRequired,
     handleDetailChange: PropTypes.func.isRequired,
+    saveDetailChange: PropTypes.func,
   };
 
   constructor(props) {
@@ -26,6 +26,10 @@ export default class DetailView extends Component {
   };
 
   saveModification = () => {
+    const { saveDetailChange } = this.props;
+    if (saveDetailChange) {
+      saveDetailChange();
+    }
     this.cancleModify();
   };
 
@@ -82,7 +86,7 @@ export default class DetailView extends Component {
               <Button icon="save" onClick={this.saveModification} >Save</Button>
             </div>
             <div className="detail-button" >
-              <Button icon="close" onClick={this.cancleModify} >Exit</Button>
+              <Button icon="logout" onClick={this.cancleModify} >Exit</Button>
             </div>
           </div>
           }

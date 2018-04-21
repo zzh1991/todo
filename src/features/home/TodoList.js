@@ -129,12 +129,35 @@ export class CommonListContainer extends Component {
   handleExpandRow = (expanded, record) => {
     if (expanded) {
       this.setState({
+        id: record.id,
         detail: record.detail,
+        description: record.description,
+        status: record.status,
+        dueDate: record.dueDate,
       });
     }
   };
 
-  renderToggleContent = () => <DetailView detail={this.state.detail} handleDetailChange={this.handleDetailChange} />;
+  saveDetailChange = () => {
+    if (!this.state.addStatus) {
+      const { id, description, dueDate, detail, status } = this.state;
+      const { type } = this.props;
+      const data = {
+        id,
+        detail,
+        description,
+        updateTime: Date.now(),
+        status,
+        dueDate,
+      };
+      updateData(data).then((res) => {
+        this.props.actions.updateToDo(res);
+      }).then(() => this.fetchTodoList(type));
+    }
+  };
+
+  renderToggleContent = () =>
+    <DetailView detail={this.state.detail} handleDetailChange={this.handleDetailChange} saveDetailChange={this.saveDetailChange} />;
 
   render() {
     const { addStatus } = this.state;
