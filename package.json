@@ -7,7 +7,7 @@
     "todo"
   ],
   "scripts": {
-    "deploy": "serve -s build"
+    "start": "serve -s build"
   },
   "dependencies": {
     "serve": "^6.5.6"
