@@ -18,3 +18,4 @@
 1. yarn add
 2. yarn start
 3. yarn build
+4. yarn deploy (run in server)

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import db from './Db';
 
 export const saveData = async (data) => {
@@ -14,5 +13,5 @@ export const selectData = async (status) => {
     .where('status')
     .equals(status)
     .toArray();
-  return _.toArray(data);
+  return data;
 };
