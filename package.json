@@ -83,7 +83,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "antd": "^3.4.3",
+    "antd": "^3.5.4",
     "dexie": "^2.0.2",
     "moment": "^2.22.0",
     "react-ace": "^6.1.0",

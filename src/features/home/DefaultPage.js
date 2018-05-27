@@ -13,9 +13,16 @@ export class DefaultPage extends Component {
     super(props);
     this.state = {
       toolbarTitle: 'Todo',
-      collapsed: false,
+      collapsed: this.getDefaultCollaspsed(),
     };
   }
+
+  getDefaultCollaspsed = () => {
+    if (window.innerWidth < 1024) {
+      return true;
+    }
+    return false;
+  };
 
   toggle = () => {
     const { collapsed } = this.state;
@@ -72,12 +79,12 @@ export class DefaultPage extends Component {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Layout style={{ padding: '0 24px 24px' }}>
+          <Layout style={{ padding: '0 24px 24px', overflowX: 'auto' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>{toolbarTitle}</Breadcrumb.Item>
             </Breadcrumb>
-            <Content style={{ background: '#fff', padding: 24, margin: 0 }}>
+            <Content style={{ background: '#fff', padding: 24, margin: 0, overflowX: 'auto' }}>
               <TodoList
                 type={toolbarTitle.toLowerCase()}
                 addMode={toolbarTitle === 'Todo'}
