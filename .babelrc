@@ -7,7 +7,7 @@
   "plugins": [
     "react-hot-loader/babel",
     "syntax-dynamic-import",
-    ["import", {"libraryName": "antd", "style": true }],
+    ["import", {"libraryName": "antd", "libraryDirectory": "es", "style": true }],
     "lodash",
     [
       "module-resolver",

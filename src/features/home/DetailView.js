@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import ReactMarkdown from 'react-markdown';
+import 'brace/theme/github';
 
 export default class DetailView extends Component {
   static propTypes = {
@@ -44,7 +46,8 @@ export default class DetailView extends Component {
       <div className="detail-grid" >
         <div>
           {!editMode &&
-          <pre className="home-detail-view" >{detail}</pre>
+          // <pre className="home-detail-view" >{detail}</pre>
+          <ReactMarkdown className="home-detail-view" source={detail} />
           }
           {editMode &&
           <AceEditor

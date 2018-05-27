@@ -87,6 +87,7 @@
     "dexie": "^2.0.2",
     "moment": "^2.22.0",
     "react-ace": "^6.1.0",
+    "react-markdown": "^3.3.2",
     "serve": "^6.5.6"
   }
 }
