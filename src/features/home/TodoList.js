@@ -25,9 +25,10 @@ export class CommonListContainer extends Component {
       description: '',
       detail: '',
       status: '',
-      dueDate: '',
+      dueDate: null,
       addStatus: false,
       id: null,
+      createTime: null,
     };
   }
 
@@ -55,31 +56,33 @@ export class CommonListContainer extends Component {
       description: '',
       detail: '',
       status: '',
-      dueDate: '',
+      dueDate: null,
       id: null,
     });
   };
 
   handleOk = () => {
-    const { id, description, dueDate, detail, status, addStatus } = this.state;
+    const { id, description, dueDate, detail, status, addStatus, createTime } = this.state;
     const { type } = this.props;
     let data = {
       description,
       updateTime: Date.now(),
       detail,
       status,
+      createTime,
     };
-    if (dueDate !== null) {
+    if (dueDate !== null && dueDate !== undefined) {
       data = {
-        dueDate: dueDate.valueOf(),
-        createTime: Date.now(),
         ...data,
+        dueDate: dueDate.valueOf(),
+        createTime: createTime || Date.now(),
       };
     }
     if (!addStatus) {
       data = {
-        id,
         ...data,
+        id,
+        createTime: createTime || Date.now(),
       };
       updateData(data).then((res) => {
         this.props.actions.updateToDo(res);
@@ -134,13 +137,14 @@ export class CommonListContainer extends Component {
         description: record.description,
         status: record.status,
         dueDate: record.dueDate,
+        createTime: record.createTime,
       });
     }
   };
 
   saveDetailChange = () => {
     if (!this.state.addStatus) {
-      const { id, description, dueDate, detail, status } = this.state;
+      const { id, description, dueDate, detail, status, createTime } = this.state;
       const { type } = this.props;
       const data = {
         id,
@@ -149,6 +153,7 @@ export class CommonListContainer extends Component {
         updateTime: Date.now(),
         status,
         dueDate,
+        createTime,
       };
       updateData(data).then((res) => {
         this.props.actions.updateToDo(res);
@@ -185,7 +190,12 @@ export class CommonListContainer extends Component {
       { title: 'Due Date',
         dataIndex: 'dueDate',
         className: 'table-column',
-        render: text => moment(text).format('YYYY-MM-DD HH:mm:ss'),
+        render: (text) => {
+          if (text === null || text === undefined) {
+            return '';
+          }
+          return moment(text).format('YYYY-MM-DD HH:mm:ss');
+        },
         key: 'dueDate',
         sorter: (a, b) => a.dueDate - b.dueDate,
       },
@@ -199,13 +209,18 @@ export class CommonListContainer extends Component {
             size="small"
             type="primary"
             onClick={() => {
+              let dueDate = null;
+              if (text.dueDate !== null && text.dueDate !== undefined) {
+                dueDate = moment(text.dueDate);
+              }
               this.setState({
                 visible: true,
                 description: text.description || '',
                 detail: text.detail || '',
                 status: text.status || '',
                 id: text.id || null,
-                dueDate: moment(text.dueDate),
+                dueDate,
+                createTime: text.createTime || Date.now(),
               });
             }}
           >
