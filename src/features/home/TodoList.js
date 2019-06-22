@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Modal, Select, Input, DatePicker } from 'antd';
+import { Button, Table, Modal, Select, Input, DatePicker, Tag } from 'antd';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -164,6 +164,16 @@ export class CommonListContainer extends Component {
   renderToggleContent = () =>
     <DetailView detail={this.state.detail} handleDetailChange={this.handleDetailChange} saveDetailChange={this.saveDetailChange} />;
 
+  renderTag = (text) => {
+    if (text === 'todo') {
+      return <Tag color="#FFA500">todo</Tag>;
+    }
+    if (text === 'completed') {
+      return <Tag color="#87d068">completed</Tag>;
+    }
+    return <Tag color="#f50">deleted</Tag>;
+  };
+
   render() {
     const { addStatus } = this.state;
     const columns = [
@@ -199,7 +209,12 @@ export class CommonListContainer extends Component {
         key: 'dueDate',
         sorter: (a, b) => a.dueDate - b.dueDate,
       },
-      { title: 'Status', dataIndex: 'status', key: 'status', className: 'table-column', },
+      { title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        className: 'table-column',
+        render: this.renderTag,
+      },
       { title: 'Action',
         className: 'table-column',
         key: 'action',

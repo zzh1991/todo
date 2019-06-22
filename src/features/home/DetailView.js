@@ -54,7 +54,7 @@ export default class DetailView extends Component {
             mode="markdown"
             theme="github"
             name="detail"
-            style={{ maxHeight: '40vh', width: '60vw', height: '40vh', maxWidth: '60vw' }}
+            style={{ maxHeight: '40vh', width: '70vw', height: '40vh', maxWidth: '75vw' }}
             fontSize={14}
             showPrintMargin={false}
             showGutter={false}
@@ -74,16 +74,16 @@ export default class DetailView extends Component {
         <div>
           {!editMode &&
           <div className="detail-button" >
-            <Button icon="edit" onClick={this.enableModify} >Modify</Button>
+            <Button icon="edit" onClick={this.enableModify} shape="circle" />
           </div>
           }
           {editMode &&
           <div>
             <div className="detail-button" >
-              <Button icon="save" onClick={this.saveModification} >Save</Button>
+              <Button icon="save" onClick={this.saveModification} shape="circle" />
             </div>
             <div className="detail-button" >
-              <Button icon="logout" onClick={this.cancleModify} >Exit</Button>
+              <Button icon="logout" onClick={this.cancleModify} shape="circle" />
             </div>
           </div>
           }

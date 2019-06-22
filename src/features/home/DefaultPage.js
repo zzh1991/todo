@@ -18,10 +18,11 @@ export class DefaultPage extends Component {
   }
 
   getDefaultCollaspsed = () => {
-    if (window.innerWidth < 1024) {
-      return true;
-    }
-    return false;
+    // if (window.innerWidth < 1024) {
+    //   return true;
+    // }
+    // return false;
+    return true;
   };
 
   toggle = () => {
