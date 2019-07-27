@@ -1,12 +1,13 @@
-# Todo List
+# To Do List
 
 <p align="center">
-    <h3 align="center">todoList</h3>
+    <h3 align="center">To Do List</h3>
     <p align="center">
         <a href="https://github.com/zzh1991/todo/blob/master/LICENSE"><img src="https://img.shields.io/github/license/zzh1991/todo.svg"></a>
         <a href="#"><img src="https://img.shields.io/github/languages/top/zzh1991/todo.svg"></a>
         <a href="#"><img src="https://img.shields.io/github/languages/count/zzh1991/todo.svg"></a>
         <a href="#"><img src="https://img.shields.io/github/search/zzh1991/todo/goto.svg"></a>
+        <a href="https://snyk.io//test/github/zzh1991/todo?targetFile=package.json"><img src="https://snyk.io//test/github/zzh1991/todo/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io//test/github/zzh1991/todo?targetFile=package.json" style="max-width:100%;"></a>
     </p>
     <p align="center">
         A Fancy Todo Task Management<br>
@@ -46,12 +47,12 @@
 
 ## Tech Stack
 
-- rekit
+- [rekit](https://github.com/rekit/rekit)
   - react v16
   - redux
   - react router v4
 - ant design
-- dexie
+- [Dexie](https://github.com/dfahlander/Dexie.js)
 - IndexedDB
 - react-markdown
 - react-ace
