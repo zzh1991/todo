@@ -17,7 +17,9 @@
     "start": "node ./tools/server.js",
     "build": "node ./tools/build.js",
     "test": "node ./tools/run_test.js",
-    "deploy": "serve -s build"
+    "deploy": "serve -s build",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "argparse": "^1.0.7",
@@ -88,6 +90,8 @@
     "moment": "^2.22.0",
     "react-ace": "^6.1.0",
     "react-markdown": "3.4.1",
-    "serve": "^11.1.0"
-  }
+    "serve": "^11.1.0",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
