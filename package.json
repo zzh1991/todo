@@ -90,7 +90,7 @@
     "moment": "^2.22.0",
     "react-ace": "^6.1.0",
     "react-markdown": "3.4.1",
-    "serve": "^12.0.0",
+    "serve": "^13.0.1",
     "snyk": "^1.316.1"
   },
   "snyk": true
